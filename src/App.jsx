@@ -1,9 +1,10 @@
 import React from "react";
-
+import Home from "./Pages/Home";
+import "@smastrom/react-rating/style.css";
 const App = () => {
 	return (
 		<div>
-			<p>Hello</p>
+			<Home />
 		</div>
 	);
 };
