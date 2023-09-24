@@ -1,8 +1,7 @@
 const Announcement = () => {
 	return (
-		<div className=" h-8 bg-teal-300 text-white flex items-center justify-center">
-			voluptas aperiam maxime doloremque voluptates provident dicta
-			suscipit cupiditate!
+		<div className="text-xs sm:text-sm h-5 sm:h-8 bg-teal-200  flex items-center justify-center text-rose-400">
+			Diwali offers! Coming Soon!
 		</div>
 	);
 };

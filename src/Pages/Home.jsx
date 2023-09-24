@@ -6,21 +6,19 @@ import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
 import { TopProductsData } from "../Data/TopProducts";
+import Layout from "../Layout";
 
 const Home = () => {
 	return (
-		<div>
-			<Announcement />
-			<Navbar />
+		<Layout>
 			<Slider />
 			<Categories />
-			<p className=" text-5xl font-bold px-5 text-fuchsia-300">
+			<p className=" text-3xl font-semibold px-2 sm:px-5 text-gray-400">
 				Top Rated Products:
 			</p>
 			<Products data={TopProductsData} />
 			<Newsletter />
-			<Footer />
-		</div>
+		</Layout>
 	);
 };
 

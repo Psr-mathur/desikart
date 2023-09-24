@@ -11,7 +11,7 @@ import React from "react";
 
 const Footer = () => {
 	return (
-		<div className=" flex  bg-slate-200">
+		<div className=" flex flex-col sm:flex-row bg-slate-200">
 			<div className=" flex-1 p-5">
 				<span className=" text-3xl font-bold">DESIKART.</span>
 				<p className=" text-justify my-3">
@@ -35,7 +35,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-			<div className=" flex-1 p-5">
+			<div className=" hidden sm:block flex-1 p-5">
 				<p className=" text-xl font-semibold mb-6">Useful Links</p>
 				<ul className=" list-none flex flex-wrap items-center justify-center gap-y-3">
 					<li className=" w-1/2 cursor-pointer">Home</li>

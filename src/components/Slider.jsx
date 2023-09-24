@@ -4,32 +4,35 @@ import { useState } from "react";
 const sliderData = [
 	{
 		id: 1,
-		img: "",
-		title: "SUMMER SALE",
+		img: "https://shorturl.at/jwAE9",
+		title: "WINTER SALE",
 		desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-		bg: "bg-sky-100",
+		bg: "#e8e8e8",
 	},
 	{
 		id: 2,
-		img: "",
-		title: "WINTER SALE",
+		img: "https://shorturl.at/vwxC9",
+		title: "SUMMER SALE",
 		desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-		bg: "",
+		bg: "#f1dec0",
 	},
 	{
 		id: 3,
-		img: "",
+		img: "https://shorturl.at/uBTX4",
 		title: "SPRING SALE",
 		desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-		bg: "",
+		bg: "#aeaeae",
 	},
 ];
 
 const SliderContent = ({ img, title, desc, bg }) => {
 	return (
-		<div className=" w-screen flex items-center">
-			<div className=" flex-1">
-				<img src="https://placekitten.com/1920" />
+		<div
+			className=" w-screen flex items-center"
+			style={{ backgroundColor: bg }}
+		>
+			<div className=" flex-1 p-12 flex items-center justify-center">
+				<img src={img} />
 			</div>
 			<div className=" flex-1 p-12">
 				<p className=" text-[72px]">{title}</p>
@@ -58,7 +61,7 @@ const Slider = () => {
 	const translateXValue = `calc(${(sliderItemIndex - 1) * -100}vw)`;
 
 	return (
-		<div className=" w-full h-[calc(100vh-125px)] flex relative border border-red-300 overflow-hidden">
+		<div className=" hidden w-full h-[calc(100vh-125px)] sm:flex relative overflow-hidden">
 			<div
 				onClick={handleLeftClick}
 				className=" w-12 h-12 bg-red-50 rounded-full flex items-center justify-center absolute m-auto top-0 bottom-0 left-3 cursor-pointer opacity-30 z-[2]"
