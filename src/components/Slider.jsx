@@ -1,5 +1,6 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@mui/icons-material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const sliderData = [
 	{
@@ -39,9 +40,11 @@ const SliderContent = ({ img, title, desc, bg }) => {
 				<p className=" my-12 text-lg tracking-widest font-medium">
 					{desc}
 				</p>
-				<button className=" p-3 text-lg bg-transparent cursor-pointer border border-black hover:bg-black hover:text-white hover:shadow-lg transition-all duration-500">
-					SHOP NOW
-				</button>
+				<Link to="/items">
+					<button className=" p-3 text-lg bg-transparent cursor-pointer border border-black hover:bg-black hover:text-white hover:shadow-lg transition-all duration-500">
+						SHOP NOW
+					</button>
+				</Link>
 			</div>
 		</div>
 	);

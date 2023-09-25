@@ -61,7 +61,7 @@ const CartItem = ({ index, id }) => {
 	);
 };
 
-const Cart = () => {
+const MyCart = () => {
 	const { itemsIds, itemsQuantities, itemsPrices } = useContext(CartContext);
 
 	const sumOfItems = itemsQuantities.reduce((accumulator, currentValue) => {
@@ -141,7 +141,7 @@ const Cart = () => {
 							</div>
 						</>
 					) : (
-						<div className="my-5 text-center font-semibold text-lg">
+						<div className="w-full my-5 text-center font-semibold text-lg">
 							Cart is Empty!
 						</div>
 					)}
@@ -151,4 +151,4 @@ const Cart = () => {
 	);
 };
 
-export default Cart;
+export default MyCart;

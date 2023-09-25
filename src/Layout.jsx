@@ -4,9 +4,11 @@ import Footer from "./components/Footer";
 
 export const Layout = ({ children }) => {
 	return (
-		<div>
-			<Navbar />
-			<Announcement />
+		<div className="">
+			<div className="sticky top-0 z-20">
+				<Navbar />
+				<Announcement />
+			</div>
 			{children}
 			<Footer />
 		</div>

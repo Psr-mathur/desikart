@@ -1,19 +1,18 @@
-import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
 import Products from "../components/Products";
-import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import { ProductsData } from "../Data/Products";
-import { CategoriesData } from "../Data/Categories";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Layout from "../Layout";
 
-const Select = ({ data, distext }) => {
+const Select = ({ data, distext, handleChangeFilterBy }) => {
+	// console.log(filterby);
+	// console.log(filterby[distext]);
 	return (
 		<select
 			name={distext}
 			id=""
+			onChange={handleChangeFilterBy}
 			className=" shadow p-3 scrollbar-thin scrollbar-thumb-cyan-100 outline-none sm:mx-3"
 		>
 			<option className="" value="" disabled selected>
@@ -35,7 +34,19 @@ const ProductList = () => {
 	const Qcategory = queryParams.get("category");
 	const Qsearch = queryParams.get("search");
 	const [dataList, setDataList] = useState(ProductsData);
-	console.log(Qsearch, Qcategory);
+
+	const [dataToShow, setDataToShow] = useState(dataList);
+
+	const [filterby, setFilterby] = useState({
+		Categories: null,
+		Price: null,
+		Rating: null,
+	});
+
+	const handleChangeFilterBy = (e) => {
+		setFilterby({ ...filterby, [e.target.name]: e.target.value });
+	};
+	// console.log(Qsearch, Qcategory);
 	useEffect(() => {
 		if (Qcategory) {
 			const filteredList = dataList.filter(
@@ -53,29 +64,76 @@ const ProductList = () => {
 			setDataList(filteredList);
 		}
 	}, []);
+
+	useEffect(() => {
+		let newList = [...dataList];
+		if (filterby["Categories"]) {
+			newList = ProductsData.filter(
+				(it) => it.category == filterby["Categories"]
+			);
+			// setDataList(newList);
+		}
+		if (filterby["Rating"]) {
+			const numberString = filterby["Rating"].match(/\d+/);
+			const rat = parseInt(numberString[0], 10);
+			newList = newList.filter((it) => it.rating >= rat);
+			// setDataList(newList);
+		}
+		if (filterby["Price"]) {
+			if (filterby["Price"] == "Low To High") {
+				const sortedProducts = newList.sort(
+					(a, b) => a.price - b.price
+				);
+				// setDataList(sortedProducts);
+			} else {
+				const sortedProducts = newList.sort(
+					(a, b) => b.price - a.price
+				);
+				// setDataList(sortedProducts);
+			}
+		}
+		setDataToShow(newList);
+	}, [filterby["Categories"], filterby["Price"], filterby["Rating"]]);
+
+	// console.log(filterby);
 	return (
 		<Layout>
-			<p className="m-5 text-2xl font-bold">Title</p>
+			<p className="hidden m-5 text-2xl font-bold">Title</p>
 			<div className=" flex justify-between">
-				<div className=" flex flex-col sm:block mx-5 sm:m-5">
-					<span className=" text-xl font-semibold mb-2 sm:mb-0">
+				<div className=" sm:block mx-5 sm:m-5">
+					<span className=" text-xl font-semibold mb-2">
 						Filter Products:
 					</span>
-					{!Qcategory && (
+					<div className=" flex gap-2 text-xs sm:text-base">
 						<Select
-							data={CategoriesData.map((cat) => cat.category)}
+							handleChangeFilterBy={handleChangeFilterBy}
+							data={[
+								...new Set(
+									ProductsData.map((cat) => cat.category)
+								),
+							]}
 							distext="Categories"
 						/>
-					)}
-					<Select data={RatingArray} distext="Rating" />
+						<Select
+							handleChangeFilterBy={handleChangeFilterBy}
+							data={["Low To High", "High To Low"]}
+							distext="Price"
+						/>
+
+						<Select
+							handleChangeFilterBy={handleChangeFilterBy}
+							data={RatingArray}
+							distext="Rating"
+						/>
+					</div>
 				</div>
-				<div className="flex flex-col sm:block mx-5 sm:m-5">
+				{/* <div className="flex flex-col sm:block mx-5 sm:m-5">
 					<span className=" text-xl font-semibold">
 						Sort Products:
 					</span>
-				</div>
+				</div> */}
 			</div>
-			<Products data={dataList} />
+			<Products data={dataToShow} />
 			<Newsletter />
 		</Layout>
 	);
